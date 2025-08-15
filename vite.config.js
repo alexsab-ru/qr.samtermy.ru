@@ -1,8 +1,11 @@
-import { defineConfig, splitVendorChunkPlugin } from 'vite'
+import { defineConfig } from 'vite'
 import liveReload from 'vite-plugin-live-reload'
 import sass from 'sass'
 // import postcss from 'vite-plugin-postcss';
 import path from "path";
+import { fileURLToPath } from 'url';
+
+const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
 export default defineConfig({
   plugins: [
@@ -50,6 +53,16 @@ export default defineConfig({
     preprocessorOptions: {
       scss: {
         implementation: sass, // Explicitly set the new API
+        silenceDeprecations: [
+          'legacy-js-api',
+          'import',
+          'mixed-decls',
+          'color-functions',
+          'global-builtin',
+        ]
+      },
+      sass: {
+        implementation: sass,
         silenceDeprecations: [
           'legacy-js-api',
           'import',
